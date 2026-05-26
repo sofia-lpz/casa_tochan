@@ -1,184 +1,521 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+/* ─── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
-}
-
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
-}
-
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
+html, body, #root {
+  margin: 0;
   padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ─── Tokens ─────────────────────────────────────────────── */
+:root {
+  --black:    #0D0D0D;
+  --gold:     #F5C800;
+  --red:      #CC2222;
+  --orange:   #E06A18;
+  --green:    #2E8B1A;
+  --white:    #FFFDF5;
+  --offwhite: #F7F3E8;
+  --brown:    #4A3828;
+  --brown-lt: #6B5240;
+
+  --font-display: 'IM Fell English', Georgia, serif;
+  --font-body:    'Lora', Georgia, serif;
+}
+
+/* ─── Page ───────────────────────────────────────────────── */
+.tochan-page {
+  min-height: 100vh;
+  background: var(--offwhite);
+  font-family: var(--font-body);
+}
+
+/* ─── Header ─────────────────────────────────────────────── */
+.tochan-header {
+  border-bottom: 3px solid var(--black);
+  padding: 0.9rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--black);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tochan-header__logo {
+  height: 44px;
+  width: 44px;
+  object-fit: contain;
+}
+
+.tochan-header__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: 0.03em;
+}
+
+.tochan-header__sub {
+  margin: 0;
+  font-size: 10px;
+  color: var(--green);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+}
+
+.tochan-header__flag {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.tochan-header__flag-stripe {
+  width: 4px;
+  height: 28px;
+}
+
+/* ─── Logo Banner ────────────────────────────────────────── */
+.tochan-logo-banner {
+  background: var(--black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem 2rem;
+  border-bottom: 4px solid var(--gold);
+}
+
+.tochan-logo-banner__img {
+  width: 220px;
+  max-width: 60%;
+  height: auto;
+  display: block;
+}
+
+/* ─── Hero ───────────────────────────────────────────────── */
+.tochan-hero {
+  background: var(--black);
+  padding: 3.5rem 2rem 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 4px solid var(--gold);
+}
+
+.tochan-hero__green-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--green);
+}
+
+.tochan-hero__bg-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+}
+
+.tochan-hero__eyebrow {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--green);
+  margin: 0 0 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.tochan-hero__title {
+  font-family: var(--font-display);
+  color: var(--gold);
+  font-size: clamp(30px, 5vw, 52px);
+  font-weight: 400;
+  margin: 0 0 1rem;
+  line-height: 1.15;
+  position: relative;
+}
+
+.tochan-hero__title em {
+  color: var(--white);
+  font-style: italic;
+}
+
+.tochan-hero__desc {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 14px;
+  max-width: 460px;
+  margin: 0 auto;
+  line-height: 1.75;
+  font-style: italic;
+  position: relative;
+}
+
+.tochan-hero__stripes {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  position: relative;
+}
+
+.tochan-hero__stripe {
+  width: 32px;
+  height: 3px;
+}
+
+/* ─── Filter bar ─────────────────────────────────────────── */
+.tochan-filters {
+  padding: 1rem 2rem;
   display: flex;
   gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+  flex-wrap: wrap;
+  border-bottom: 2px solid var(--black);
+  background: var(--gold);
+  align-items: center;
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+.tochan-filters__label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--black);
+  margin-right: 4px;
+  letter-spacing: 0.05em;
 }
 
-.ticks {
+.tochan-filters__count {
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--black);
+  opacity: 0.6;
+}
+
+.cat-btn {
+  background: none;
+  border: 1.5px solid var(--black);
+  color: var(--black);
+  padding: 5px 16px;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 13px;
+  transition: background 0.15s, color 0.15s;
+  letter-spacing: 0.04em;
+}
+
+.cat-btn:hover,
+.cat-btn.active {
+  background: var(--black);
+  color: var(--gold);
+}
+
+/* ─── Grid ───────────────────────────────────────────────── */
+.tochan-main {
+  padding: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0;
+  border-top: 2px solid var(--black);
+  border-left: 2px solid var(--black);
+}
+
+.shop-grid > * {
+  border-right: 2px solid var(--black);
+  border-bottom: 2px solid var(--black);
+  border-top: none;
+  border-left: none;
+}
+
+/* ─── Product card ───────────────────────────────────────── */
+.product-card {
+  background: var(--white);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card__image {
+  height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  width: 100%;
+  overflow: hidden;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+.product-card__pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+}
+
+.product-card__emoji {
+  font-size: 68px;
+  position: relative;
+  z-index: 1;
+}
+
+.product-card__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 10px;
+  font-family: var(--font-display);
+  padding: 3px 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.product-card__body {
+  padding: 1rem 1.1rem 1.1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.product-card__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 19px;
+  color: var(--black);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.product-card__desc {
+  margin: 0;
+  font-size: 13px;
+  color: var(--brown);
+  line-height: 1.65;
+  font-family: var(--font-body);
+  flex: 1;
+}
+
+.product-card__tags {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.product-card__tag {
+  font-size: 10px;
+  background: var(--offwhite);
+  color: var(--black);
+  border: 1px solid var(--black);
+  padding: 2px 8px;
+  font-family: var(--font-body);
+  letter-spacing: 0.03em;
+}
+
+.product-card__divider {
+  border: none;
+  border-top: 1.5px solid var(--black);
+  margin: 4px 0 0;
+}
+
+.product-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-card__price {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--black);
+  font-weight: 400;
+}
+
+.product-card__price-unit {
+  font-size: 12px;
+  color: var(--brown-lt);
+  margin-left: 4px;
+}
+
+.product-card__cta {
+  background: var(--black);
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 12px;
+  font-family: var(--font-display);
+  padding: 6px 14px;
+  letter-spacing: 0.05em;
+  transition: background 0.15s;
+}
+
+.product-card__cta:hover {
+  background: var(--red);
+}
+
+/* ─── Footer ─────────────────────────────────────────────── */
+.tochan-footer {
+  border-top: 3px solid var(--gold);
+  padding: 2rem;
+  text-align: center;
+  background: var(--black);
+}
+
+.tochan-footer__stripes {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.tochan-footer__stripe {
+  width: 28px;
+  height: 3px;
+}
+
+.tochan-footer__name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  margin: 0 0 0.4rem;
+  color: var(--gold);
+}
+
+.tochan-footer__tagline {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  font-style: italic;
+}
+
+/* ─── Responsive ─────────────────────────────────────────── */
+
+/* Tablet: ≤ 768px */
+@media (max-width: 768px) {
+  .tochan-logo-banner {
+    padding: 2rem 1rem;
   }
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
+  .tochan-logo-banner__img {
+    width: 180px;
   }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+
+  .tochan-header {
+    padding: 0.75rem 1rem;
+    gap: 10px;
+  }
+
+  .tochan-header__name {
+    font-size: 22px;
+  }
+
+  .tochan-header__flag {
+    display: none;
+  }
+
+  .tochan-hero {
+    padding: 2.5rem 1rem 2rem;
+  }
+
+  .tochan-filters {
+    padding: 0.75rem 1rem;
+    gap: 6px;
+  }
+
+  .tochan-filters__count {
+    width: 100%;
+    margin-left: 0;
+    text-align: right;
+  }
+
+  .tochan-main {
+    padding: 1rem;
+  }
+
+  .shop-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .product-card__image {
+    height: 160px;
+  }
+
+  .product-card__emoji {
+    font-size: 54px;
+  }
+
+  .tochan-footer {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Mobile: ≤ 480px */
+@media (max-width: 480px) {
+  .tochan-logo-banner {
+    padding: 1.5rem 1rem;
+  }
+
+  .tochan-logo-banner__img {
+    width: 140px;
+  }
+
+  .tochan-header__logo {
+    height: 36px;
+    width: 36px;
+  }
+
+  .tochan-header__name {
+    font-size: 20px;
+  }
+
+  .tochan-hero {
+    padding: 2rem 1rem 1.75rem;
+  }
+
+  .tochan-hero__desc {
+    font-size: 13px;
+  }
+
+  .tochan-filters {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .cat-btn {
+    font-size: 12px;
+    padding: 4px 12px;
+  }
+
+  .tochan-main {
+    padding: 0.75rem;
+  }
+
+  .shop-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card__image {
+    height: 180px;
+  }
+
+  .product-card__emoji {
+    font-size: 64px;
+  }
+
+  .product-card__price {
+    font-size: 20px;
   }
 }
